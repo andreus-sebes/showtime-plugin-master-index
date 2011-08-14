@@ -13,3 +13,12 @@
 [submodule "plugins/dropbox"]
 	path = plugins/dropbox
 	url = git://github.com/andoma/showtime-plugin-dropbox.git
+[submodule "plugins/gametrailers"]
+	path = plugins/gametrailers
+	url = https://github.com/facanferff/showtime-plugin-gametrailers.git
+[submodule "plugins/channel9"]
+	path = plugins/channel9
+	url = https://github.com/facanferff/showtime-plugin-channel9.git
+[submodule "plugins/watchtv"]
+	path = plugins/watchtv
+	url = https://github.com/facanferff/showtime-plugin-watchtv.git

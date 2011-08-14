@@ -55,8 +55,14 @@ for ppath in sys.argv[2:]:
         print "Path '%s' is not a valid plugin. Missing plugin.json, skipping" % ppath
         continue
 
-    pconf = json.loads(f.read())
+    txt = f.read()
     f.close()
+
+    try:
+        pconf = json.loads(txt.decode('utf8'))
+    except UnicodeDecodeError:
+        pconf = json.loads(txt.decode('latin-1'))
+        
 
     if 'id' not in pconf:
         print '%s lacks "id" field' % confpath
