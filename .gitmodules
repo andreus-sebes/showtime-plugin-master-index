@@ -28,3 +28,6 @@
 [submodule "plugins/omgmanga"]
 	path = plugins/omgmanga
 	url = git://github.com/andoma/showtime-plugin-omgmanga.git
+[submodule "plugins/youtube"]
+	path = plugins/youtube
+	url = git://github.com/facanferff/showtime-plugin-youtube.git
