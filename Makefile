@@ -8,3 +8,6 @@ clean:
 
 upload:
 	rsync -rv output/ ${SHOWTIMEPLUGINREPO}
+
+updateall:
+	for a in plugins/* ; do (cd $$a ; git checkout master && git pull --rebase); done
