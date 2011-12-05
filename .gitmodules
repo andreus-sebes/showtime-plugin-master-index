@@ -22,12 +22,18 @@
 [submodule "plugins/watchtv"]
 	path = plugins/watchtv
 	url = https://github.com/facanferff/showtime-plugin-watchtv.git
-[submodule "plugins/revision3"]
-	path = plugins/revision3
-	url = git://github.com/andoma/showtime-plugin-revision3.git
-[submodule "plugins/omgmanga"]
-	path = plugins/omgmanga
-	url = git://github.com/andoma/showtime-plugin-omgmanga.git
 [submodule "plugins/youtube"]
 	path = plugins/youtube
 	url = git://github.com/facanferff/showtime-plugin-youtube.git
+[submodule "plugins/ted"]
+	path = plugins/ted
+	url = https://github.com/NP-/showtime-plugin-ted.git
+[submodule "plugins/revision3"]
+	path = plugins/revision3
+	url = https://github.com/NP-/showtime-plugin-revision3.git
+[submodule "plugins/megaviewer"]
+	path = plugins/megaviewer
+	url = https://github.com/NP-/showtime-plugin-megaviewer.git
+[submodule "plugins/omgmanga"]
+	path = plugins/omgmanga
+	url = https://github.com/NP-/showtime-plugin-omgmanga.git
