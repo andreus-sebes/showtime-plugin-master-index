@@ -23,7 +23,7 @@ import zipfile
 import json
 import os
 import shutil
-
+import subprocess
 
 if len(sys.argv) < 2:
     print "Invalid number of of args"
@@ -46,6 +46,16 @@ def have_pid(pid):
         if p['id'] == pid:
             return True
     return False
+
+
+def get_git_version(path):
+    pipe = subprocess.Popen('git describe --always', shell=True, cwd=path, stdout = subprocess.PIPE,stderr = subprocess.PIPE )
+
+    (out, error) = pipe.communicate()
+    pipe.wait()
+    if len(error.strip()):
+        return None
+    return out.strip()
 
 for ppath in sys.argv[2:]:
     confpath = os.path.join(ppath, 'plugin.json')
@@ -104,6 +114,12 @@ for ppath in sys.argv[2:]:
         pconf['icon'] = tgt
 
     pconf['downloadURL'] = '%s.zip' % pid
+
+
+    gitver = get_git_version(ppath);
+    if gitver:
+        pconf['repoversion'] = gitver
+
     print " * Including %s" % pid
     outdata.append(pconf)
 
