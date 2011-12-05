@@ -37,3 +37,6 @@
 [submodule "plugins/omgmanga"]
 	path = plugins/omgmanga
 	url = https://github.com/NP-/showtime-plugin-omgmanga.git
+[submodule "plugins/trailers"]
+	path = plugins/trailers
+	url = https://github.com/NP-/showtime-plugin-trailers.git
