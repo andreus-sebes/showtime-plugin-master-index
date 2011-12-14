@@ -43,3 +43,6 @@
 [submodule "plugins/hdtrailers"]
 	path = plugins/hdtrailers
 	url = https://github.com/NP-/showtime-plugin-hdtrailers.git
+[submodule "plugins/webmedia"]
+	path = plugins/webmedia
+	url = https://github.com/andreus-sebes/showtime-plugin-webmedia.git
