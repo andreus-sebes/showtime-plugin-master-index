@@ -23,7 +23,7 @@ import zipfile
 import json
 import os
 import shutil
-import subprocess
+import hashlib
 
 if len(sys.argv) < 2:
     print "Invalid number of of args"
@@ -48,14 +48,6 @@ def have_pid(pid):
     return False
 
 
-def get_git_version(path):
-    pipe = subprocess.Popen('git describe --always', shell=True, cwd=path, stdout = subprocess.PIPE,stderr = subprocess.PIPE )
-
-    (out, error) = pipe.communicate()
-    pipe.wait()
-    if len(error.strip()):
-        return None
-    return out.strip()
 
 for ppath in sys.argv[2:]:
     confpath = os.path.join(ppath, 'plugin.json')
@@ -84,8 +76,9 @@ for ppath in sys.argv[2:]:
         print "Path '%s' contains ID '%s' that is already indexed" % (ppath, pid)
         continue
 
-    zf = zipfile.ZipFile(os.path.join(outpath, '%s.zip' % pid), 'w',
-                         zipfile.ZIP_DEFLATED)
+    zippath = os.path.join(outpath, '%s.zip' % pid)
+
+    zf = zipfile.ZipFile(zippath, 'w', zipfile.ZIP_DEFLATED)
     zf.writestr('plugin.json', json.dumps(pconf))
 
     for f in os.listdir(ppath):
@@ -115,10 +108,11 @@ for ppath in sys.argv[2:]:
 
     pconf['downloadURL'] = '%s.zip' % pid
 
-
-    gitver = get_git_version(ppath);
-    if gitver:
-        pconf['repoversion'] = gitver
+    z = open(zippath)
+    h = hashlib.new('sha1')
+    h.update(z.read())
+    pconf['hash'] = h.hexdigest()
+    z.close()
 
     print " * Including %s" % pid
     outdata.append(pconf)
