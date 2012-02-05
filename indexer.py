@@ -64,6 +64,12 @@ for ppath in sys.argv[2:]:
         pconf = json.loads(txt.decode('utf8'))
     except UnicodeDecodeError:
         pconf = json.loads(txt.decode('latin-1'))
+    except ValueError, err:
+        print '%s broken JSON: %s' % (confpath, err)
+        continue
+    except:
+        print '%s broken JSON' % (confpath, )
+        raise
         
 
     if 'id' not in pconf:
