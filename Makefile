@@ -7,7 +7,7 @@ clean:
 	rm *~
 
 upload:
-	rsync -rv output/ ${SHOWTIMEPLUGINREPO}
+	rsync -rv output/ showtime.lonelycoder.com:showtime.lonelycoder.com/plugins
 
 updateall:
 	for a in plugins/* ; do (cd $$a ; git checkout master && git pull --rebase); done
