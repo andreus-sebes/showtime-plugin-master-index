@@ -24,6 +24,9 @@ import json
 import os
 import shutil
 import hashlib
+import codecs
+import datetime
+import time
 
 if len(sys.argv) < 2:
     print "Invalid number of of args"
@@ -130,4 +133,55 @@ plugin_index = {
     'plugins': outdata}
 
 f.write(json.dumps(plugin_index, indent=1))
+f.close()
+
+
+from operator import itemgetter
+outdata = sorted(outdata, key=itemgetter('title'))
+
+html_escape_table = {
+    "&": "&amp;",
+    '"': "&quot;",
+    "'": "&apos;",
+    ">": "&gt;",
+    "<": "&lt;",
+    }
+
+def html_escape(text):
+    return "".join(html_escape_table.get(c,c) for c in text)
+
+f = codecs.open(os.path.join(outpath, 'plugins.html'), 'w', 'utf-8')
+
+print >>f, '<table class="plugin-table">'
+print >>f, '<tr>'
+print >>f, '  <th>Application</th>'
+print >>f, '  <th>Version</th>'
+print >>f, '  <th>Short description</th>'
+print >>f, '  <th>Author</th>'
+print >>f, '</tr>'
+
+for i,a in enumerate(outdata):
+    print >>f, '<tr class="%s">' % ('plugin-row-even', 'plugin-row-odd')[i&1]
+    if 'homepage' in a:
+        print >>f, '<td class="plugin-title"><a href="%s">%s</a></td>' % \
+            (a['homepage'], html_escape(a['title']))
+    else:
+        print >>f, '<td class="plugin-title">%s</td>' % html_escape(a['title'])
+    print >>f, '<td>%s</td>' % html_escape(a['version'])
+
+    s = ''
+    if 'synopsis' in a:
+        s += '<span class="plugin-synopsis">' + a['synopsis'] + '</span>'
+    if 'description' in a:
+        s += '<span class="plugin-desc">'+a['description'] + '</span>'
+
+    print >>f, '<td>%s</td>' % s
+    print >>f, '<td>%s</td>' % html_escape(a.get('author', '???'))
+    print >>f, '</tr>'
+
+print >>f, '</table>'
+
+
+print >>f, '<p>List of plugins last updated on %s</p>' % time.ctime()
+
 f.close()
