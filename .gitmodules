@@ -46,3 +46,6 @@
 [submodule "plugins/webmedia"]
 	path = plugins/webmedia
 	url = https://github.com/andreus-sebes/showtime-plugin-webmedia.git
+[submodule "plugins/navi-x"]
+	path = plugins/navi-x
+	url = https://github.com/facanferff/showtime-plugin-navi-x.git
